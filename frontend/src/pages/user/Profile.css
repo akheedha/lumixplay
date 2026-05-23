@@ -1,0 +1,178 @@
+.profile-page{
+  margin-left:90px;
+
+  min-height:100vh;
+
+  background:#050816;
+
+  color:white;
+
+  padding:35px;
+}
+
+/* HEADER */
+
+.profile-header{
+  display:flex;
+
+  align-items:center;
+
+  gap:25px;
+
+  margin-bottom:50px;
+}
+
+.profile-avatar{
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  background:#8b5cf6;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:42px;
+  font-weight:700;
+}
+
+.profile-info h1{
+  font-size:42px;
+
+  margin-bottom:10px;
+}
+
+.profile-info p{
+  color:#9ca3af;
+
+  margin-bottom:15px;
+}
+
+.premium-badge{
+  background:#8b5cf6;
+
+  padding:8px 16px;
+
+  border-radius:30px;
+
+  font-size:14px;
+}
+
+/* STATS */
+
+.stats-grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit, minmax(220px, 1fr));
+
+  gap:25px;
+
+  margin-bottom:50px;
+}
+
+.stat-card{
+  background:#111827;
+
+  padding:35px;
+
+  border-radius:22px;
+
+  text-align:center;
+}
+
+.stat-card h2{
+  font-size:42px;
+
+  margin-bottom:12px;
+
+  color:#8b5cf6;
+}
+
+.stat-card p{
+  color:#d1d5db;
+}
+
+/* SETTINGS */
+
+.settings-section h2{
+  margin-bottom:25px;
+}
+
+.settings-card{
+  background:#111827;
+
+  border-radius:22px;
+
+  overflow:hidden;
+}
+
+.setting-item{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:25px;
+
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.setting-item:last-child{
+  border-bottom:none;
+}
+
+.setting-item h3{
+  margin-bottom:8px;
+}
+
+.setting-item p{
+  color:#9ca3af;
+}
+
+.setting-item button{
+  background:#8b5cf6;
+
+  border:none;
+
+  color:white;
+
+  padding:12px 22px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+}
+
+.logout-btn{
+  background:#ef4444 !important;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .profile-page{
+    margin-left:0;
+
+    padding-bottom:100px;
+  }
+
+  .profile-header{
+    flex-direction:column;
+
+    text-align:center;
+  }
+
+  .setting-item{
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:15px;
+  }
+
+}

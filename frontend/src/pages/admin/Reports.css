@@ -1,0 +1,157 @@
+.reports-page{
+  margin-left:260px;
+
+  min-height:100vh;
+
+  background:#050816;
+
+  color:white;
+
+  padding:35px;
+}
+
+.reports-page h1{
+  font-size:42px;
+
+  margin-bottom:35px;
+}
+
+/* ANALYTICS */
+
+.analytics-grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit, minmax(220px, 1fr));
+
+  gap:25px;
+
+  margin-bottom:45px;
+}
+
+.analytics-card{
+  background:#111827;
+
+  padding:35px;
+
+  border-radius:22px;
+}
+
+.analytics-card h2{
+  font-size:42px;
+
+  color:#8b5cf6;
+
+  margin-bottom:12px;
+}
+
+.analytics-card p{
+  color:#d1d5db;
+}
+
+/* TOP MOVIES */
+
+.top-movies-section{
+  margin-bottom:50px;
+}
+
+.top-movies-section h2{
+  margin-bottom:25px;
+}
+
+.top-movies-list{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:20px;
+}
+
+.top-movie-item{
+  background:#111827;
+
+  padding:22px;
+
+  border-radius:18px;
+}
+
+.top-movie-item h3{
+  margin-bottom:8px;
+}
+
+.top-movie-item p{
+  color:#9ca3af;
+
+  margin-bottom:18px;
+}
+
+/* PROGRESS */
+
+.movie-progress{
+  width:100%;
+
+  height:10px;
+
+  background:#374151;
+
+  border-radius:20px;
+
+  overflow:hidden;
+}
+
+.movie-progress-fill{
+  height:100%;
+
+  background:#8b5cf6;
+}
+
+/* TABLE */
+
+.report-table-wrapper{
+  overflow-x:auto;
+}
+
+.report-table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  background:#111827;
+
+  border-radius:22px;
+
+  overflow:hidden;
+}
+
+.report-table th{
+  text-align:left;
+
+  padding:22px;
+
+  background:#1f2937;
+
+  color:#d1d5db;
+}
+
+.report-table td{
+  padding:22px;
+
+  border-bottom:
+  1px solid rgba(255,255,255,0.05);
+}
+
+.report-table tr:last-child td{
+  border-bottom:none;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .reports-page{
+    margin-left:0;
+
+    padding-bottom:100px;
+  }
+
+}

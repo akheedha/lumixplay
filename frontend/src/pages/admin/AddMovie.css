@@ -1,0 +1,118 @@
+.add-movie-page{
+  margin-left:260px;
+
+  min-height:100vh;
+
+  background:#050816;
+
+  color:white;
+
+  padding:35px;
+}
+
+.add-movie-page h1{
+  font-size:40px;
+
+  margin-bottom:35px;
+}
+
+/* FORM */
+
+.movie-form{
+  max-width:750px;
+
+  background:#111827;
+
+  padding:35px;
+
+  border-radius:24px;
+}
+
+.form-group{
+  display:flex;
+
+  flex-direction:column;
+
+  margin-bottom:25px;
+}
+
+.form-group label{
+  margin-bottom:12px;
+
+  color:#d1d5db;
+
+  font-size:15px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+
+  padding:15px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:#1f2937;
+
+  color:white;
+
+  outline:none;
+
+  font-size:15px;
+}
+
+.form-group textarea{
+  resize:none;
+}
+
+/* FILE INPUT */
+
+.form-group input[type="file"]{
+  padding:12px;
+}
+
+/* BUTTON */
+
+.submit-movie-btn{
+  width:100%;
+
+  padding:16px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:#8b5cf6;
+
+  color:white;
+
+  font-size:16px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+.submit-movie-btn:hover{
+  background:#7c3aed;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .add-movie-page{
+    margin-left:0;
+
+    padding-bottom:100px;
+  }
+
+  .movie-form{
+    padding:25px;
+  }
+
+}

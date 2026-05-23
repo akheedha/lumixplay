@@ -1,0 +1,180 @@
+.movie-row{
+  padding:0 20px;
+
+  margin-bottom:45px;
+}
+
+/* HEADER */
+
+.movie-row-header{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:22px;
+}
+
+.movie-row-header h2{
+  color:white;
+
+  font-size:30px;
+
+  font-weight:700;
+}
+
+.movie-row-header span{
+  color:#8b5cf6;
+
+  cursor:pointer;
+
+  font-size:15px;
+}
+
+/* CARD */
+
+.movie-card{
+  position:relative;
+
+  height:330px;
+
+  border-radius:22px;
+
+  overflow:hidden;
+
+  cursor:pointer;
+
+  transition:0.4s;
+}
+
+.movie-card img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transition:0.4s;
+}
+
+/* HOVER EFFECT */
+
+.movie-card:hover{
+  transform:scale(1.06);
+}
+
+.movie-card:hover img{
+  transform:scale(1.1);
+}
+
+/* OVERLAY */
+
+.movie-overlay{
+  position:absolute;
+
+  inset:0;
+
+  background:
+  linear-gradient(
+    to top,
+    rgba(0,0,0,0.95),
+    transparent
+  );
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:flex-end;
+
+  padding:20px;
+
+  opacity:0;
+
+  transition:0.4s;
+}
+
+.movie-card:hover .movie-overlay{
+  opacity:1;
+}
+
+.movie-overlay h3{
+  color:white;
+
+  font-size:22px;
+
+  margin-bottom:15px;
+}
+
+/* BUTTONS */
+
+.movie-buttons{
+  display:flex;
+
+  gap:12px;
+}
+
+.movie-buttons button{
+  width:45px;
+  height:45px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:#8b5cf6;
+
+  color:white;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+.movie-buttons button:hover{
+  transform:scale(1.1);
+
+  background:#7c3aed;
+}
+
+/* SWIPER */
+
+.swiper{
+  overflow:visible !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev{
+  color:white !important;
+
+  background:
+  rgba(0,0,0,0.6);
+
+  width:45px !important;
+  height:45px !important;
+
+  border-radius:50%;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after{
+  font-size:18px !important;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  .movie-card{
+    height:240px;
+  }
+
+  .movie-overlay h3{
+    font-size:16px;
+  }
+
+}

@@ -1,0 +1,312 @@
+.movie-details-page{
+  background:#040714;
+
+  min-height:100vh;
+
+  margin-left:110px;
+
+  color:white;
+
+  overflow:hidden;
+}
+
+/* HERO */
+
+.details-hero{
+  height:90vh;
+
+  position:relative;
+
+  background-image:
+  linear-gradient(
+    to right,
+    rgba(0,0,0,0.95),
+    rgba(0,0,0,0.4)
+  ),
+  url("https://wallpapercave.com/wp/wp1817978.jpg");
+
+  background-size:cover;
+  background-position:center;
+
+  display:flex;
+  align-items:center;
+}
+
+/* OVERLAY */
+
+.details-overlay{
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+
+  padding:80px;
+}
+
+/* CONTENT */
+
+.details-content{
+  max-width:700px;
+
+  animation:fadeUp 1s ease;
+}
+
+/* META */
+
+.details-meta{
+  display:flex;
+
+  gap:18px;
+
+  flex-wrap:wrap;
+
+  margin-bottom:25px;
+}
+
+.details-meta span{
+  background:
+  rgba(255,255,255,0.1);
+
+  backdrop-filter:blur(10px);
+
+  padding:10px 18px;
+
+  border-radius:30px;
+
+  font-size:14px;
+}
+
+.rating{
+  color:#facc15;
+
+  display:flex;
+  align-items:center;
+
+  gap:8px;
+}
+
+/* TITLE */
+
+.details-content h1{
+  font-size:95px;
+
+  font-weight:900;
+
+  line-height:0.9;
+
+  margin-bottom:30px;
+
+  letter-spacing:-4px;
+}
+
+/* DESCRIPTION */
+
+.details-content p{
+  font-size:20px;
+
+  line-height:1.9;
+
+  color:#d1d5db;
+
+  margin-bottom:40px;
+}
+
+/* BUTTONS */
+
+.details-buttons{
+  display:flex;
+
+  gap:20px;
+
+  flex-wrap:wrap;
+}
+
+.play-btn,
+.watchlist-btn{
+  border:none;
+
+  padding:18px 34px;
+
+  border-radius:18px;
+
+  font-size:16px;
+  font-weight:600;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  cursor:pointer;
+
+  transition:0.35s;
+}
+
+/* PLAY */
+
+.play-btn{
+  background:#8b5cf6;
+
+  color:white;
+
+  box-shadow:
+  0 10px 30px rgba(139,92,246,0.4);
+}
+
+.play-btn:hover{
+  transform:translateY(-4px);
+
+  background:#7c3aed;
+}
+
+/* WATCHLIST */
+
+.watchlist-btn{
+  background:
+  rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(14px);
+
+  color:white;
+}
+
+.watchlist-btn:hover{
+  transform:translateY(-4px);
+
+  background:
+  rgba(255,255,255,0.15);
+}
+
+/* STORY SECTION */
+
+.story-section{
+  padding:60px 30px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(320px,1fr));
+
+  gap:30px;
+}
+
+/* GLASS CARD */
+
+.glass-card{
+  background:
+  rgba(255,255,255,0.06);
+
+  backdrop-filter:blur(16px);
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  border-radius:28px;
+
+  padding:35px;
+
+  box-shadow:
+  0 10px 40px rgba(0,0,0,0.25);
+}
+
+.glass-card h2{
+  font-size:32px;
+
+  margin-bottom:20px;
+}
+
+.glass-card p{
+  color:#d1d5db;
+
+  line-height:1.9;
+
+  font-size:16px;
+}
+
+/* CAST */
+
+.cast-list{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:15px;
+}
+
+.cast-item{
+  background:
+  rgba(139,92,246,0.15);
+
+  padding:14px 20px;
+
+  border-radius:18px;
+
+  transition:0.3s;
+
+  cursor:pointer;
+}
+
+.cast-item:hover{
+  transform:translateY(-4px);
+
+  background:
+  rgba(139,92,246,0.35);
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+  .details-content h1{
+    font-size:70px;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .movie-details-page{
+    margin-left:0;
+
+    padding-bottom:100px;
+  }
+
+  .details-hero{
+    height:80vh;
+  }
+
+  .details-overlay{
+    padding:35px;
+  }
+
+  .details-content h1{
+    font-size:52px;
+  }
+
+  .details-content p{
+    font-size:16px;
+  }
+
+  .story-section{
+    padding:25px;
+  }
+
+}

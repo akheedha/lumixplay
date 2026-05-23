@@ -1,0 +1,141 @@
+.users-page{
+  margin-left:260px;
+
+  min-height:100vh;
+
+  background:#050816;
+
+  color:white;
+
+  padding:35px;
+}
+
+/* HEADER */
+
+.users-header{
+  margin-bottom:30px;
+}
+
+.users-header h1{
+  font-size:40px;
+}
+
+/* SEARCH */
+
+.users-search{
+  margin-bottom:30px;
+}
+
+.users-search input{
+  width:100%;
+
+  max-width:450px;
+
+  padding:15px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:#111827;
+
+  color:white;
+
+  outline:none;
+}
+
+/* TABLE */
+
+.users-table-wrapper{
+  overflow-x:auto;
+}
+
+.users-table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  background:#111827;
+
+  border-radius:22px;
+
+  overflow:hidden;
+}
+
+.users-table th{
+  text-align:left;
+
+  padding:22px;
+
+  background:#1f2937;
+
+  color:#d1d5db;
+}
+
+.users-table td{
+  padding:22px;
+
+  border-bottom:
+  1px solid rgba(255,255,255,0.05);
+}
+
+.users-table tr:last-child td{
+  border-bottom:none;
+}
+
+/* STATUS */
+
+.status-active{
+  background:#10b981;
+
+  padding:8px 14px;
+
+  border-radius:20px;
+
+  font-size:13px;
+}
+
+.status-blocked{
+  background:#ef4444;
+
+  padding:8px 14px;
+
+  border-radius:20px;
+
+  font-size:13px;
+}
+
+/* BUTTONS */
+
+.block-btn,
+.unblock-btn{
+  border:none;
+
+  padding:12px 18px;
+
+  border-radius:10px;
+
+  color:white;
+
+  cursor:pointer;
+}
+
+.block-btn{
+  background:#ef4444;
+}
+
+.unblock-btn{
+  background:#10b981;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .users-page{
+    margin-left:0;
+
+    padding-bottom:100px;
+  }
+
+}

@@ -1,0 +1,175 @@
+.sidebar{
+  width:110px;
+  height:100vh;
+
+  position:fixed;
+  left:0;
+  top:0;
+
+  background:
+  linear-gradient(
+    to bottom,
+    rgba(5,8,22,0.95),
+    rgba(2,6,18,0.98)
+  );
+
+  backdrop-filter:blur(20px);
+
+  border-right:
+  1px solid rgba(255,255,255,0.06);
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+
+  padding:20px 0;
+
+  z-index:999;
+
+  box-shadow:
+  0 0 40px rgba(139,92,246,0.15);
+}
+
+/* LOGO */
+
+.sidebar-logo{
+  margin-bottom:45px;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.sidebar-logo img{
+  width:52px;
+  height:52px;
+
+  border-radius:18px;
+
+  box-shadow:
+  0 0 25px rgba(139,92,246,0.5);
+}
+
+.sidebar-logo h1{
+  color:white;
+
+  font-size:18px;
+
+  font-weight:800;
+}
+
+.sidebar-logo span{
+  color:#8b5cf6;
+}
+
+/* MENU */
+
+.sidebar-menu{
+  display:flex;
+  flex-direction:column;
+
+  gap:16px;
+
+  width:100%;
+
+  align-items:center;
+}
+
+.sidebar-item{
+  width:74px;
+  height:74px;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+
+  border-radius:22px;
+
+  color:#94a3b8;
+
+  text-decoration:none;
+
+  transition:0.35s;
+
+  position:relative;
+}
+
+.sidebar-item svg{
+  font-size:23px;
+}
+
+.sidebar-item span{
+  font-size:12px;
+}
+
+.sidebar-item:hover{
+  background:
+  rgba(139,92,246,0.18);
+
+  color:white;
+
+  transform:
+  translateY(-4px) scale(1.03);
+
+  box-shadow:
+  0 10px 25px rgba(139,92,246,0.25);
+}
+
+.active{
+  background:#8b5cf6;
+
+  color:white;
+
+  box-shadow:
+  0 12px 25px rgba(139,92,246,0.4);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .sidebar{
+    width:100%;
+
+    height:82px;
+
+    bottom:0;
+    top:auto;
+
+    flex-direction:row;
+
+    justify-content:center;
+
+    padding:0;
+  }
+
+  .sidebar-logo{
+    display:none;
+  }
+
+  .sidebar-menu{
+    flex-direction:row;
+
+    justify-content:space-around;
+
+    width:100%;
+  }
+
+  .sidebar-item{
+    width:auto;
+    height:auto;
+
+    background:none !important;
+
+    box-shadow:none !important;
+  }
+
+}
