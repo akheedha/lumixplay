@@ -1,11 +1,11 @@
 .movie-details-page{
-  background:#040714;
+  background:var(--bg);
 
   min-height:100vh;
 
   margin-left:110px;
 
-  color:white;
+  color:var(--text);
 
   overflow:hidden;
 }
@@ -89,7 +89,7 @@
 /* TITLE */
 
 .details-content h1{
-  font-size:95px;
+  font-size:clamp(48px, 8vw, 92px);
 
   font-weight:900;
 
@@ -97,7 +97,7 @@
 
   margin-bottom:30px;
 
-  letter-spacing:-4px;
+  letter-spacing:0;
 }
 
 /* DESCRIPTION */
@@ -107,7 +107,7 @@
 
   line-height:1.9;
 
-  color:#d1d5db;
+  color:var(--muted);
 
   margin-bottom:40px;
 }
@@ -128,7 +128,7 @@
 
   padding:18px 34px;
 
-  border-radius:18px;
+  border-radius:8px;
 
   font-size:16px;
   font-weight:600;
@@ -147,7 +147,7 @@
 /* PLAY */
 
 .play-btn{
-  background:#8b5cf6;
+  background:var(--accent);
 
   color:white;
 
@@ -203,7 +203,7 @@
   border:
   1px solid rgba(255,255,255,0.08);
 
-  border-radius:28px;
+  border-radius:8px;
 
   padding:35px;
 
@@ -218,7 +218,7 @@
 }
 
 .glass-card p{
-  color:#d1d5db;
+  color:var(--muted);
 
   line-height:1.9;
 
@@ -241,9 +241,9 @@
 
   padding:14px 20px;
 
-  border-radius:18px;
+  border-radius:8px;
 
-  transition:0.3s;
+  transition:transform 180ms ease, background-color 180ms ease;
 
   cursor:pointer;
 }

@@ -3,9 +3,9 @@
 
   min-height:100vh;
 
-  background:#050816;
+  background:var(--bg);
 
-  color:white;
+  color:var(--text);
 
   padding:35px;
 }
@@ -26,9 +26,9 @@
   width:120px;
   height:120px;
 
-  border-radius:50%;
+  border-radius:8px;
 
-  background:#8b5cf6;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
 
   display:flex;
   align-items:center;
@@ -45,17 +45,17 @@
 }
 
 .profile-info p{
-  color:#9ca3af;
+  color:var(--muted);
 
   margin-bottom:15px;
 }
 
 .premium-badge{
-  background:#8b5cf6;
+  background:var(--accent);
 
   padding:8px 16px;
 
-  border-radius:30px;
+  border-radius:999px;
 
   font-size:14px;
 }
@@ -74,11 +74,12 @@
 }
 
 .stat-card{
-  background:#111827;
+  background:var(--surface);
 
-  padding:35px;
+  padding:28px;
 
-  border-radius:22px;
+  border-radius:8px;
+  border:1px solid var(--line);
 
   text-align:center;
 }
@@ -88,11 +89,11 @@
 
   margin-bottom:12px;
 
-  color:#8b5cf6;
+  color:var(--accent);
 }
 
 .stat-card p{
-  color:#d1d5db;
+  color:var(--muted);
 }
 
 /* SETTINGS */
@@ -102,11 +103,12 @@
 }
 
 .settings-card{
-  background:#111827;
+  background:var(--surface);
 
-  border-radius:22px;
+  border-radius:8px;
 
   overflow:hidden;
+  border:1px solid var(--line);
 }
 
 .setting-item{
@@ -130,11 +132,11 @@
 }
 
 .setting-item p{
-  color:#9ca3af;
+  color:var(--muted);
 }
 
 .setting-item button{
-  background:#8b5cf6;
+  background:var(--accent);
 
   border:none;
 
@@ -142,7 +144,7 @@
 
   padding:12px 22px;
 
-  border-radius:10px;
+  border-radius:8px;
 
   cursor:pointer;
 }

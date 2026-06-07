@@ -3,9 +3,9 @@
 
   min-height:100vh;
 
-  background:#050816;
+  background:var(--bg);
 
-  color:white;
+  color:var(--text);
 
   padding:35px;
 }
@@ -30,23 +30,30 @@
 }
 
 .dashboard-card{
-  background:#111827;
+  background:var(--surface);
 
-  padding:35px;
+  padding:28px;
 
-  border-radius:22px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  transition:transform 180ms ease, border-color 180ms ease;
+}
+
+.dashboard-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(139,92,246,0.45);
 }
 
 .dashboard-card h2{
   font-size:42px;
 
-  color:#8b5cf6;
+  color:var(--accent);
 
   margin-bottom:12px;
 }
 
 .dashboard-card p{
-  color:#d1d5db;
+  color:var(--muted);
 }
 
 /* RECENT */
@@ -56,17 +63,18 @@
 }
 
 .activity-card{
-  background:#111827;
+  background:var(--surface);
 
-  padding:30px;
+  padding:28px;
 
-  border-radius:22px;
+  border-radius:8px;
+  border:1px solid var(--line);
 }
 
 .activity-card p{
   margin-bottom:18px;
 
-  color:#d1d5db;
+  color:var(--muted);
 }
 
 /* MOBILE */

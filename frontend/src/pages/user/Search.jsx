@@ -1,127 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import { Link } from "react-router-dom";
 
 import "./Search.css";
 
+import { EmptyState, LoadingGrid } from "../../components/common/StateBlocks";
+import { api, imageFor } from "../../services/api";
+
 function Search() {
+  const [query, setQuery] = useState("");
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const movies = [
-
-    {
-      title: "Interstellar",
-      image:
-        "https://wallpapercave.com/wp/wp1817978.jpg"
-    },
-
-    {
-      title: "Batman",
-      image:
-        "https://wallpapercave.com/wp/wp5344288.jpg"
-    },
-
-    {
-      title: "Avengers",
-      image:
-        "https://wallpapercave.com/wp/wp4431823.jpg"
-    },
-
-    {
-      title: "Joker",
-      image:
-        "https://wallpapercave.com/wp/wp1945903.jpg"
-    },
-
-    {
-      title: "Dark Knight",
-      image:
-        "https://wallpapercave.com/wp/wp4056410.jpg"
-    },
-
-    {
-      title: "Matrix",
-      image:
-        "https://wallpapercave.com/wp/wp2014282.jpg"
-    }
-
-  ];
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      api(`/movies/?q=${encodeURIComponent(query)}`)
+        .then((data) => setMovies(data.movies))
+        .catch(console.error)
+        .finally(() => setLoading(false));
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [query]);
 
   return (
-
     <div className="search-page">
-
-      {/* SEARCH BAR */}
-
       <div className="search-header">
-
         <input
           type="text"
-          placeholder="Search movies, shows..."
+          placeholder="Search movies..."
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
         />
-
       </div>
-
-      {/* FILTERS */}
 
       <div className="search-filters">
-
-        <button className="active-filter">
-          All
-        </button>
-
-        <button>
-          Movies
-        </button>
-
-        <button>
-          TV Shows
-        </button>
-
-        <button>
-          Action
-        </button>
-
-        <button>
-          Sci-Fi
-        </button>
-
+        <button className="active-filter">All</button>
+        <button>Movies</button>
+        <button>Action</button>
+        <button>Sci-Fi</button>
+        <button>Drama</button>
       </div>
-
-      {/* MOVIE GRID */}
 
       <div className="search-grid">
-
-        {
-          movies.map((movie, index) => (
-
-            <div className="search-card" key={index}>
-
-              <img
-                src={movie.image}
-                alt={movie.title}
-              />
-
-              <div className="search-overlay">
-
-                <h3>
-                  {movie.title}
-                </h3>
-
-                <button>
-                  ▶ Watch
-                </button>
-
-              </div>
-
+        {loading ? (
+          <LoadingGrid count={6} />
+        ) : movies.length === 0 ? (
+          <EmptyState title="No matches found" message="Try a different title or clear your search." />
+        ) : movies.map((movie) => (
+          <div className="search-card" key={movie.id}>
+            <img src={imageFor(movie)} alt={movie.title} loading="lazy" />
+            <div className="search-overlay">
+              <h3>{movie.title}</h3>
+              <Link to={`/player/${movie.id}`}>
+                <button>Watch</button>
+              </Link>
             </div>
-
-          ))
-        }
-
+          </div>
+        ))}
       </div>
-
     </div>
-
   );
-
 }
 
 export default Search;

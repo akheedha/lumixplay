@@ -1,6 +1,12 @@
 import React from "react";
 
 import {
+  Link,
+  useLocation,
+  useNavigate
+} from "react-router-dom";
+
+import {
   FaHome,
   FaFilm,
   FaUsers,
@@ -9,8 +15,20 @@ import {
 } from "react-icons/fa";
 
 import "./AdminSidebar.css";
+import { clearSession } from "../../services/api";
 
 function AdminSidebar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    clearSession();
+    navigate("/admin/login");
+  };
+
+  const itemClass = (path) => (
+    location.pathname === path ? "admin-menu-item active-admin" : "admin-menu-item"
+  );
 
   return (
 
@@ -22,29 +40,29 @@ function AdminSidebar() {
 
       <div className="admin-menu">
 
-        <div className="admin-menu-item active-admin">
+        <Link to="/admin/dashboard" className={itemClass("/admin/dashboard")}>
           <FaHome />
           <span>Dashboard</span>
-        </div>
+        </Link>
 
-        <div className="admin-menu-item">
+        <Link to="/admin/movies" className={itemClass("/admin/movies")}>
           <FaFilm />
           <span>Movies</span>
-        </div>
+        </Link>
 
-        <div className="admin-menu-item">
+        <Link to="/admin/users" className={itemClass("/admin/users")}>
           <FaUsers />
           <span>Users</span>
-        </div>
+        </Link>
 
-        <div className="admin-menu-item">
+        <Link to="/admin/reports" className={itemClass("/admin/reports")}>
           <FaChartBar />
           <span>Reports</span>
-        </div>
+        </Link>
 
       </div>
 
-      <div className="admin-logout">
+      <div className="admin-logout" onClick={logout}>
 
         <FaSignOutAlt />
 

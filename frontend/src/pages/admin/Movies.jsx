@@ -1,141 +1,85 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import {
   FaEdit,
   FaTrash
 } from "react-icons/fa";
 
+import { Link } from "react-router-dom";
+
 import "./Movies.css";
 
+import { EmptyState } from "../../components/common/StateBlocks";
+import { api } from "../../services/api";
+
 function Movies() {
+  const [movies, setMovies] = useState([]);
+  const [query, setQuery] = useState("");
 
-  const movies = [
+  const load = useCallback(async () => {
+    const data = await api(`/movies/?q=${encodeURIComponent(query)}`);
+    setMovies(data.movies);
+  }, [query]);
 
-    {
-      title: "Interstellar",
-      genre: "Sci-Fi",
-      year: "2014"
-    },
+  const remove = async (movieId) => {
+    await api(`/movies/${movieId}/`, { method: "DELETE" });
+    load().catch(console.error);
+  };
 
-    {
-      title: "Batman",
-      genre: "Action",
-      year: "2022"
-    },
-
-    {
-      title: "Joker",
-      genre: "Drama",
-      year: "2019"
-    },
-
-    {
-      title: "Avengers Endgame",
-      genre: "Action",
-      year: "2019"
-    }
-
-  ];
+  useEffect(() => {
+    load().catch(console.error);
+  }, [load]);
 
   return (
-
     <div className="movies-page">
-
-      {/* HEADER */}
-
       <div className="movies-header">
-
-        <h1>
-          Movies Management
-        </h1>
-
-        <button className="add-movie-btn">
-          + Add Movie
-        </button>
-
+        <h1>Movies Management</h1>
+        <Link to="/admin/add-movie">
+          <button className="add-movie-btn">+ Add Movie</button>
+        </Link>
       </div>
-
-      {/* SEARCH */}
 
       <div className="movies-search">
-
-        <input
-          type="text"
-          placeholder="Search movies..."
-        />
-
+        <input type="text" placeholder="Search movies..." value={query} onChange={(event) => setQuery(event.target.value)} />
       </div>
-
-      {/* TABLE */}
 
       <div className="movies-table-wrapper">
-
         <table className="movies-table">
-
           <thead>
-
             <tr>
-
               <th>Movie</th>
-
               <th>Genre</th>
-
               <th>Year</th>
-
               <th>Actions</th>
-
             </tr>
-
           </thead>
-
           <tbody>
-
-            {
-              movies.map((movie, index) => (
-
-                <tr key={index}>
-
-                  <td>{movie.title}</td>
-
-                  <td>{movie.genre}</td>
-
-                  <td>{movie.year}</td>
-
-                  <td>
-
-                    <div className="action-buttons">
-
-                      <button className="edit-btn">
-
-                        <FaEdit />
-
-                      </button>
-
-                      <button className="delete-btn">
-
-                        <FaTrash />
-
-                      </button>
-
-                    </div>
-
-                  </td>
-
-                </tr>
-
-              ))
-            }
-
+            {movies.length === 0 ? (
+              <tr>
+                <td colSpan="4">
+                  <EmptyState title="No movies found" message="Add a movie or adjust your search." />
+                </td>
+              </tr>
+            ) : movies.map((movie) => (
+              <tr key={movie.id}>
+                <td>{movie.title}</td>
+                <td>{movie.genre}</td>
+                <td>{movie.release_year}</td>
+                <td>
+                  <div className="action-buttons">
+                    <Link to={`/admin/add-movie?id=${movie.id}`}>
+                      <button className="edit-btn"><FaEdit /></button>
+                    </Link>
+                    <button className="delete-btn" onClick={() => remove(movie.id)}><FaTrash /></button>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
-
         </table>
-
       </div>
-
     </div>
-
   );
-
 }
 
 export default Movies;

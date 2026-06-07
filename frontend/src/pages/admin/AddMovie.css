@@ -3,9 +3,9 @@
 
   min-height:100vh;
 
-  background:#050816;
+  background:var(--bg);
 
-  color:white;
+  color:var(--text);
 
   padding:35px;
 }
@@ -21,11 +21,12 @@
 .movie-form{
   max-width:750px;
 
-  background:#111827;
+  background:var(--surface);
 
-  padding:35px;
+  padding:28px;
 
-  border-radius:24px;
+  border-radius:8px;
+  border:1px solid var(--line);
 }
 
 .form-group{
@@ -39,7 +40,7 @@
 .form-group label{
   margin-bottom:12px;
 
-  color:#d1d5db;
+  color:var(--muted);
 
   font-size:15px;
 }
@@ -53,11 +54,11 @@
 
   border:none;
 
-  border-radius:14px;
+  border-radius:8px;
 
-  background:#1f2937;
+  background:var(--surface-2);
 
-  color:white;
+  color:var(--text);
 
   outline:none;
 
@@ -83,9 +84,9 @@
 
   border:none;
 
-  border-radius:14px;
+  border-radius:8px;
 
-  background:#8b5cf6;
+  background:var(--accent);
 
   color:white;
 
@@ -94,7 +95,6 @@
 
   cursor:pointer;
 
-  transition:0.3s;
 }
 
 .submit-movie-btn:hover{

@@ -3,8 +3,6 @@ import React from "react";
 import {
   FaHome,
   FaSearch,
-  FaTv,
-  FaFilm,
   FaHeart,
   FaUser
 } from "react-icons/fa";
@@ -68,16 +66,6 @@ function Sidebar() {
           <FaSearch />
           <span>Search</span>
         </Link>
-
-        <div className="sidebar-item">
-          <FaTv />
-          <span>TV Shows</span>
-        </div>
-
-        <div className="sidebar-item">
-          <FaFilm />
-          <span>Movies</span>
-        </div>
 
         <Link
           to="/watchlist"

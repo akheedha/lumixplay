@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
+
+import { Link, useParams } from "react-router-dom";
 
 import {
   FaPlay,
@@ -11,161 +13,86 @@ import {
 import "./MovieDetails.css";
 
 import MovieRow from "../../components/user/MovieRow";
+import { api, imageFor } from "../../services/api";
 
 function MovieDetails() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    api(`/movies/${id}/`).then((data) => setMovie(data.movie)).catch(console.error);
+    api("/movies/").then((data) => setMovies(data.movies)).catch(console.error);
+  }, [id]);
+
+  if (!movie) {
+    return <div className="movie-details-page"></div>;
+  }
 
   return (
-
     <motion.div
       className="movie-details-page"
-
       initial={{ opacity:0 }}
       animate={{ opacity:1 }}
-
       transition={{ duration:0.5 }}
     >
-
-      {/* HERO BANNER */}
-
-      <div className="details-hero">
-
-        {/* OVERLAY */}
-
+      <div
+        className="details-hero"
+        style={{ backgroundImage: `url(${imageFor(movie)})` }}
+      >
         <div className="details-overlay">
-
           <div className="details-content">
-
-            {/* MOVIE INFO */}
-
             <div className="details-meta">
-
-              <span>
-                Sci-Fi
-              </span>
-
-              <span>
-                Adventure
-              </span>
-
-              <span>
-                2h 49m
-              </span>
-
+              <span>{movie.genre || "Movie"}</span>
+              <span>{movie.release_year}</span>
+              <span>{movie.view_count} views</span>
               <span className="rating">
-
                 <FaStar />
-
                 8.7
-
               </span>
-
             </div>
 
-            {/* TITLE */}
-
-            <h1>
-              INTERSTELLAR
-            </h1>
-
-            {/* DESCRIPTION */}
-
-            <p>
-              A team of explorers travel through a wormhole
-              in space in an attempt to ensure humanity's
-              survival. As Earth faces extinction, Cooper
-              and his crew embark on the most important
-              mission in human history.
-            </p>
-
-            {/* BUTTONS */}
+            <h1>{movie.title}</h1>
+            <p>{movie.description}</p>
 
             <div className="details-buttons">
+              <Link to={`/player/${movie.id}`}>
+                <button className="play-btn">
+                  <FaPlay />
+                  Watch Now
+                </button>
+              </Link>
 
-              <button className="play-btn">
-
-                <FaPlay />
-
-                Watch Now
-
-              </button>
-
-              <button className="watchlist-btn">
-
+              <button
+                className="watchlist-btn"
+                onClick={() => api(`/watchlist/${movie.id}/`, { method: "POST" })}
+              >
                 <FaPlus />
-
                 Watchlist
-
               </button>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
-      {/* STORY SECTION */}
 
       <div className="story-section">
-
         <div className="glass-card">
-
-          <h2>
-            Storyline
-          </h2>
-
-          <p>
-            In the near future, Earth becomes uninhabitable.
-            Former NASA pilot Cooper joins a mission through
-            a mysterious wormhole to search for a new home
-            for humanity. Facing black holes, time dilation,
-            and emotional sacrifice, the crew fights to save
-            civilization itself.
-          </p>
-
+          <h2>Storyline</h2>
+          <p>{movie.description}</p>
         </div>
 
-        {/* CAST */}
-
         <div className="glass-card">
-
-          <h2>
-            Cast
-          </h2>
-
+          <h2>Stats</h2>
           <div className="cast-list">
-
-            <div className="cast-item">
-              Matthew McConaughey
-            </div>
-
-            <div className="cast-item">
-              Anne Hathaway
-            </div>
-
-            <div className="cast-item">
-              Jessica Chastain
-            </div>
-
-            <div className="cast-item">
-              Michael Caine
-            </div>
-
+            <div className="cast-item">{movie.view_count} views</div>
+            <div className="cast-item">{movie.watchlist_count} watchlist adds</div>
           </div>
-
         </div>
-
       </div>
 
-      {/* RELATED MOVIES */}
-
-      <MovieRow title="More Like This" />
-
+      <MovieRow title="More Like This" movies={movies.filter((item) => item.id !== movie.id)} />
     </motion.div>
-
   );
-
 }
 
 export default MovieDetails;

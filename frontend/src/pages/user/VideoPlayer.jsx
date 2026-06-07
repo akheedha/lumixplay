@@ -1,179 +1,75 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import {
-  FaPlay,
-  FaPause,
-  FaVolumeUp,
-  FaExpand,
-  FaStepForward
-} from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
 
 import "./VideoPlayer.css";
 
+import { api, imageFor } from "../../services/api";
+
+function youtubeEmbedUrl(url) {
+  if (!url) {
+    return "";
+  }
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?/]+)/);
+  return match ? `https://www.youtube.com/embed/${match[1]}?autoplay=1` : "";
+}
+
 function VideoPlayer() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    api(`/movies/${id}/watch/`, { method: "POST" })
+      .then((data) => setMovie(data.movie))
+      .catch(console.error);
+    api("/movies/").then((data) => setMovies(data.movies)).catch(console.error);
+  }, [id]);
+
+  if (!movie) {
+    return <div className="player-page"></div>;
+  }
+
+  const youtubeUrl = youtubeEmbedUrl(movie.video_url);
 
   return (
-
     <div className="player-page">
-
-      {/* VIDEO SECTION */}
-
       <div className="video-container">
-
-        <video
-          className="movie-video"
-          controls
-          autoPlay
-        >
-
-          <source
-            src="https://www.w3schools.com/html/mov_bbb.mp4"
-            type="video/mp4"
-          />
-
-        </video>
-
-        {/* OVERLAY */}
+        {youtubeUrl ? (
+          <iframe
+            className="movie-video"
+            src={youtubeUrl}
+            title={movie.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <video className="movie-video" controls autoPlay poster={imageFor(movie)}>
+            <source src={movie.video_url || "https://www.w3schools.com/html/mov_bbb.mp4"} type="video/mp4" />
+          </video>
+        )}
 
         <div className="video-overlay">
-
-          {/* TOP */}
-
           <div className="player-top">
-
-            <h1>
-              Interstellar
-            </h1>
-
-            <span>
-              Sci-Fi • Adventure • 2h 49m
-            </span>
-
+            <h1>{movie.title}</h1>
+            <span>{movie.genre} - {movie.release_year}</span>
           </div>
-
-          {/* CENTER */}
-
-          <div className="player-center">
-
-            <button className="skip-btn">
-              Skip Intro
-            </button>
-
-          </div>
-
-          {/* BOTTOM CONTROLS */}
-
-          <div className="player-controls">
-
-            {/* PROGRESS */}
-
-            <div className="progress-wrapper">
-
-              <div className="progress-bar-player">
-
-                <div className="progress-fill-player"></div>
-
-              </div>
-
-            </div>
-
-            {/* CONTROLS */}
-
-            <div className="controls-row">
-
-              <div className="left-controls">
-
-                <button>
-                  <FaPlay />
-                </button>
-
-                <button>
-                  <FaPause />
-                </button>
-
-                <button>
-                  <FaVolumeUp />
-                </button>
-
-              </div>
-
-              <div className="right-controls">
-
-                <button>
-                  <FaStepForward />
-                </button>
-
-                <button>
-                  <FaExpand />
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-
         </div>
-
       </div>
-
-      {/* NEXT MOVIES */}
 
       <div className="next-section">
-
-        <h2>
-          Up Next
-        </h2>
-
+        <h2>Up Next</h2>
         <div className="next-grid">
-
-          <div className="next-card">
-
-            <img
-              src="https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg"
-              alt=""
-            />
-
-            <h3>
-              Batman
-            </h3>
-
-          </div>
-
-          <div className="next-card">
-
-            <img
-              src="https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg"
-              alt=""
-            />
-
-            <h3>
-              John Wick
-            </h3>
-
-          </div>
-
-          <div className="next-card">
-
-            <img
-              src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
-              alt=""
-            />
-
-            <h3>
-              Oppenheimer
-            </h3>
-
-          </div>
-
+          {movies.filter((item) => item.id !== movie.id).slice(0, 3).map((item) => (
+            <Link to={`/player/${item.id}`} className="next-card" key={item.id}>
+              <img src={imageFor(item)} alt={item.title} />
+              <h3>{item.title}</h3>
+            </Link>
+          ))}
         </div>
-
       </div>
-
     </div>
-
   );
-
 }
 
 export default VideoPlayer;

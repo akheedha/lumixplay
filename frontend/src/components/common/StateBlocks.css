@@ -1,0 +1,54 @@
+.loading-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:22px;
+}
+
+.skeleton-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.skeleton-poster{
+  aspect-ratio:2/3;
+  background:linear-gradient(90deg,#111827,#1f2937,#111827);
+  background-size:220% 100%;
+  animation:skeletonPulse 1.3s ease-in-out infinite;
+}
+
+.skeleton-line{
+  height:14px;
+  margin:16px;
+  border-radius:999px;
+  background:#1f2937;
+}
+
+.skeleton-line.short{
+  width:55%;
+}
+
+.empty-state{
+  border:1px solid var(--line);
+  background:var(--surface);
+  border-radius:8px;
+  padding:32px;
+  color:var(--muted);
+}
+
+.empty-state h3{
+  color:var(--text);
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+@keyframes skeletonPulse{
+  from{
+    background-position:120% 0;
+  }
+
+  to{
+    background-position:-120% 0;
+  }
+}

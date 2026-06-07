@@ -118,7 +118,7 @@ function AppRoutes() {
         />
 
         <Route
-          path="/movie-details"
+          path="/movie-details/:id"
           element={
             <PageWrapper>
               <Sidebar />
@@ -128,7 +128,7 @@ function AppRoutes() {
         />
 
         <Route
-          path="/player"
+          path="/player/:id"
           element={
             <PageWrapper>
               <Sidebar />

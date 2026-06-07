@@ -3,9 +3,9 @@
 
   min-height:100vh;
 
-  background:#050816;
+  background:var(--bg);
 
-  color:white;
+  color:var(--text);
 
   padding:35px;
 }
@@ -35,9 +35,9 @@
 
   border:none;
 
-  border-radius:14px;
+  border-radius:8px;
 
-  background:#111827;
+  background:var(--surface);
 
   color:white;
 
@@ -55,11 +55,12 @@
 
   border-collapse:collapse;
 
-  background:#111827;
+  background:var(--surface);
 
-  border-radius:22px;
+  border-radius:8px;
 
   overflow:hidden;
+  border:1px solid var(--line);
 }
 
 .users-table th{
@@ -67,9 +68,9 @@
 
   padding:22px;
 
-  background:#1f2937;
+  background:var(--surface-2);
 
-  color:#d1d5db;
+  color:var(--muted);
 }
 
 .users-table td{
@@ -79,6 +80,14 @@
   1px solid rgba(255,255,255,0.05);
 }
 
+.users-table tbody tr{
+  transition:background-color 160ms ease;
+}
+
+.users-table tbody tr:hover{
+  background:rgba(255,255,255,0.035);
+}
+
 .users-table tr:last-child td{
   border-bottom:none;
 }
@@ -86,7 +95,7 @@
 /* STATUS */
 
 .status-active{
-  background:#10b981;
+  background:var(--success);
 
   padding:8px 14px;
 
@@ -96,7 +105,7 @@
 }
 
 .status-blocked{
-  background:#ef4444;
+  background:var(--danger);
 
   padding:8px 14px;
 
@@ -113,19 +122,25 @@
 
   padding:12px 18px;
 
-  border-radius:10px;
+  border-radius:8px;
 
   color:white;
 
   cursor:pointer;
 }
 
+.users-table td:last-child{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
 .block-btn{
-  background:#ef4444;
+  background:var(--danger);
 }
 
 .unblock-btn{
-  background:#10b981;
+  background:var(--success);
 }
 
 /* MOBILE */

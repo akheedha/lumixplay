@@ -13,47 +13,56 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import {
+  Link
+} from "react-router-dom";
+
+import {
   FaPlay,
   FaPlus
 } from "react-icons/fa";
 
+import { toast } from "react-hot-toast";
+
 import "./MovieRow.css";
 
-const movies = [
+import { EmptyState } from "../common/StateBlocks";
+import { api, imageFor } from "../../services/api";
 
-  {
-    title:"Batman",
-    image:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg"
-  },
+function MovieRow({ title, movies = [], onChanged }) {
 
-  {
-    title:"Joker",
-    image:"https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg"
-  },
+  const addToWatchlist = async (movieId) => {
 
-  {
-    title:"Interstellar",
-    image:"https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
-  },
+    try {
 
-  {
-    title:"John Wick",
-    image:"https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg"
-  },
+      const data = await api(
+        `/watchlist/${movieId}/`,
+        {
+          method: "POST"
+        }
+      );
 
-  {
-    title:"Avengers",
-    image:"https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
-  },
+      if (
+        data.message &&
+        data.message.toLowerCase().includes("removed")
+      ) {
+        toast("Removed from watchlist");
+      } else {
+        toast.success("Added to watchlist");
+      }
 
-  {
-    title:"Oppenheimer",
-    image:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
-  }
+      if (onChanged) {
+        onChanged();
+      }
 
-];
+    } catch (error) {
 
-function MovieRow({ title }) {
+      toast.error(
+        error.message || "Failed to update watchlist"
+      );
+
+    }
+
+  };
 
   return (
 
@@ -67,63 +76,64 @@ function MovieRow({ title }) {
 
       </div>
 
-      <Swiper
+      {movies.length === 0 ? (
 
-        modules={[Navigation]}
+        <EmptyState
+          title="No movies yet"
+          message="New titles will appear here as soon as they are added."
+        />
 
-        navigation
+      ) : (
 
-        spaceBetween={20}
+        <Swiper
+          modules={[Navigation]}
+          navigation
+          spaceBetween={20}
+          breakpoints={{
+            320: {
+              slidesPerView: 2
+            },
+            768: {
+              slidesPerView: 3
+            },
+            1024: {
+              slidesPerView: 5
+            },
+            1400: {
+              slidesPerView: 6
+            }
+          }}
+        >
 
-        breakpoints={{
+          {movies.map((movie) => (
 
-          320:{
-            slidesPerView:2
-          },
-
-          768:{
-            slidesPerView:3
-          },
-
-          1024:{
-            slidesPerView:5
-          },
-
-          1400:{
-            slidesPerView:6
-          }
-
-        }}
-
-      >
-
-        {
-          movies.map((movie,index)=>(
-
-            <SwiperSlide key={index}>
+            <SwiperSlide key={movie.id}>
 
               <div className="movie-card">
 
                 <img
-                  src={movie.image}
+                  src={imageFor(movie)}
                   alt={movie.title}
+                  loading="lazy"
                 />
-
-                {/* HOVER OVERLAY */}
 
                 <div className="movie-overlay">
 
-                  <h3>
-                    {movie.title}
-                  </h3>
+                  <h3>{movie.title}</h3>
 
                   <div className="movie-buttons">
 
-                    <button>
-                      <FaPlay />
-                    </button>
+                    <Link to={`/player/${movie.id}`}>
+                      <button>
+                        <FaPlay />
+                      </button>
+                    </Link>
 
-                    <button>
+                    <button
+                      onClick={() =>
+                        addToWatchlist(movie.id)
+                      }
+                    >
                       <FaPlus />
                     </button>
 
@@ -135,10 +145,11 @@ function MovieRow({ title }) {
 
             </SwiperSlide>
 
-          ))
-        }
+          ))}
 
-      </Swiper>
+        </Swiper>
+
+      )}
 
     </div>
 
@@ -146,4 +157,4 @@ function MovieRow({ title }) {
 
 }
 
-export default MovieRow;
+export default React.memo(MovieRow);

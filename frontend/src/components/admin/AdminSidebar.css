@@ -20,7 +20,7 @@
 }
 
 .admin-logo{
-  color:#8b5cf6;
+  color:var(--accent);
 
   font-size:32px;
   font-weight:800;
@@ -44,19 +44,20 @@
 
   padding:16px 18px;
 
-  border-radius:14px;
+  border-radius:8px;
 
   color:#d1d5db;
 
   cursor:pointer;
 
-  transition:0.3s;
+  transition:background-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .admin-menu-item:hover{
   background:#1e293b;
 
   color:white;
+  transform:translateX(2px);
 }
 
 .admin-menu-item svg{
@@ -64,7 +65,7 @@
 }
 
 .active-admin{
-  background:#8b5cf6;
+  background:var(--accent);
 
   color:white;
 }
@@ -78,7 +79,7 @@
 
   padding:16px 18px;
 
-  border-radius:14px;
+  border-radius:8px;
 
   color:#ef4444;
 
