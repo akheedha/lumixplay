@@ -109,39 +109,53 @@ function MovieRow({ title, movies = [], onChanged }) {
 
             <SwiperSlide key={movie.id}>
 
-              <div className="movie-card">
+              <Link
+                to={`/movie-details/${movie.id}`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit"
+                }}
+              >
 
-                <img
-                  src={imageFor(movie)}
-                  alt={movie.title}
-                  loading="lazy"
-                />
+                <div className="movie-card">
 
-                <div className="movie-overlay">
+                  <img
+                    src={imageFor(movie)}
+                    alt={movie.title}
+                    loading="lazy"
+                  />
 
-                  <h3>{movie.title}</h3>
+                  <div className="movie-overlay">
 
-                  <div className="movie-buttons">
+                    <h3>{movie.title}</h3>
 
-                    <Link to={`/player/${movie.id}`}>
-                      <button>
-                        <FaPlay />
+                    <div className="movie-buttons">
+
+                      <Link
+                        to={`/player/${movie.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button>
+                          <FaPlay />
+                        </button>
+                      </Link>
+
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          addToWatchlist(movie.id);
+                        }}
+                      >
+                        <FaPlus />
                       </button>
-                    </Link>
 
-                    <button
-                      onClick={() =>
-                        addToWatchlist(movie.id)
-                      }
-                    >
-                      <FaPlus />
-                    </button>
+                    </div>
 
                   </div>
 
                 </div>
 
-              </div>
+              </Link>
 
             </SwiperSlide>
 
