@@ -75,8 +75,7 @@ function Login({ initialRole = "user" }) {
           <span className="login-kicker">Final project preview</span>
           <h1>LumixPlay</h1>
           <p>
-            One entry point for recruiters to test the OTT streaming experience
-            as either a viewer or an administrator.
+            A full-stack movie streaming platform with dedicated viewer and admin experiences.
           </p>
 
           <div className="login-preview-grid">
