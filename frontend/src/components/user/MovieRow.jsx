@@ -13,7 +13,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import {
-  Link
+  useNavigate
 } from "react-router-dom";
 
 import {
@@ -29,6 +29,7 @@ import { EmptyState } from "../common/StateBlocks";
 import { api, imageFor } from "../../services/api";
 
 function MovieRow({ title, movies = [], onChanged }) {
+  const navigate = useNavigate();
 
   const addToWatchlist = async (movieId) => {
 
@@ -109,53 +110,55 @@ function MovieRow({ title, movies = [], onChanged }) {
 
             <SwiperSlide key={movie.id}>
 
-              <Link
-                to={`/movie-details/${movie.id}`}
-                style={{
-                  textDecoration: "none",
-                  color: "inherit"
+              <div
+                className="movie-card"
+                role="button"
+                tabIndex="0"
+                onClick={() => navigate(`/movie-details/${movie.id}`)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    navigate(`/movie-details/${movie.id}`);
+                  }
                 }}
               >
 
-                <div className="movie-card">
+                <img
+                  src={imageFor(movie)}
+                  alt={movie.title}
+                  loading="lazy"
+                />
 
-                  <img
-                    src={imageFor(movie)}
-                    alt={movie.title}
-                    loading="lazy"
-                  />
+                <div className="movie-overlay">
 
-                  <div className="movie-overlay">
+                  <h3>{movie.title}</h3>
 
-                    <h3>{movie.title}</h3>
+                  <div className="movie-buttons">
 
-                    <div className="movie-buttons">
+                    <button
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        navigate(`/player/${movie.id}`);
+                      }}
+                      aria-label={`Play ${movie.title}`}
+                    >
+                      <FaPlay />
+                    </button>
 
-                      <Link
-                        to={`/player/${movie.id}`}
-                        onClick={(e) => e.stopPropagation()}
+                    <button
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        addToWatchlist(movie.id);
+                      }}
+                      aria-label={`Add ${movie.title} to watchlist`}
                       >
-                        <button>
-                          <FaPlay />
-                        </button>
-                      </Link>
-
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          addToWatchlist(movie.id);
-                        }}
-                      >
-                        <FaPlus />
-                      </button>
-
-                    </div>
+                      <FaPlus />
+                    </button>
 
                   </div>
 
                 </div>
 
-              </Link>
+              </div>
 
             </SwiperSlide>
 

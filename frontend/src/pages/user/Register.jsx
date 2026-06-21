@@ -56,7 +56,7 @@ function Register() {
       toast.success("Account created successfully 🎉");
 
       setTimeout(() => {
-        navigate("/");
+      navigate("/home");
       }, 1000);
     } catch (err) {
       toast.error(err.message || "Registration failed");

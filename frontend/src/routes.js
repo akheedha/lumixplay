@@ -63,6 +63,15 @@ function AppRoutes() {
           path="/"
           element={
             <PageWrapper>
+              <Login />
+            </PageWrapper>
+          }
+        />
+
+        <Route
+          path="/home"
+          element={
+            <PageWrapper>
               <Sidebar />
               <Home />
             </PageWrapper>
